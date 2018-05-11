@@ -11,7 +11,7 @@ export interface IAppProps {
 class App extends React.Component<{}, IAppProps> {
   constructor(props: IAppProps) {
     super(props);
-    this.state = { item: '', items: ['test'] };
+    this.state = { item: '', items: [] };
   }
   public onChange = (e: any): any => {
     const newItem: any = e.target.value;
@@ -25,6 +25,19 @@ class App extends React.Component<{}, IAppProps> {
       item: ''
     });
   };
+
+  public onDelete = (e: any) => {
+    const toDelete: string = e.target.parentElement.innerText.replace(
+      'Delete',
+      ''
+    );
+    const filteredItems: any[] = this.state.items.filter(
+      item => item !== toDelete
+    );
+    this.setState({
+      items: filteredItems
+    });
+  };
   public render() {
     return (
       <div className="App">
@@ -36,7 +49,7 @@ class App extends React.Component<{}, IAppProps> {
           onChange={this.onChange}
           onSubmit={this.onSubmit}
         />
-        <List items={this.state.items} />
+        <List items={this.state.items} onDelete={this.onDelete} />
       </div>
     );
   }

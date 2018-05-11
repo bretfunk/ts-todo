@@ -9,15 +9,11 @@ interface IInputProps {
 
 class Input extends React.Component<IInputProps> {
   public render() {
+    const { item, onChange, onSubmit } = this.props;
     return (
       <>
-        <input
-          type="text"
-          name={this.props.item}
-          placeholder={this.props.item}
-          onChange={this.props.onChange}
-        />
-        <input type="submit" name="Submit" onClick={this.props.onSubmit} />
+        <input type="text" name={item} placeholder={item} onChange={onChange} />
+        <input type="submit" name="Submit" onClick={onSubmit} />
       </>
     );
   }
